@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Alert, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import { Agenda, LocaleConfig } from 'react-native-calendars';
+import {Agenda, LocaleConfig} from 'react-native-calendars';
 
 import moment from 'moment';
 import 'moment/locale/pt-br';
@@ -8,12 +8,46 @@ import 'moment/locale/pt-br';
 const testIDs = require('./testIDs');
 
 LocaleConfig.locales['pt-br'] = {
-   monthNames: ['Janeiro','fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-   monthNamesShort: ['Jan.','Fev.','Mar','Abr','Mai','Jun','Jul.','Ago','Set.','Out.','Nov.','Dez.'],
-   dayNames: ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'],
-   dayNamesShort: ['Dom.','Seg.','Ter.','Qua.','Qui.','Sex.','Sáb.'],
-   today: 'Hoje'
- };
+  monthNames: [
+    'Janeiro',
+    'fevereiro',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro',
+  ],
+  monthNamesShort: [
+    'Jan.',
+    'Fev.',
+    'Mar',
+    'Abr',
+    'Mai',
+    'Jun',
+    'Jul.',
+    'Ago',
+    'Set.',
+    'Out.',
+    'Nov.',
+    'Dez.',
+  ],
+  dayNames: [
+    'Domingo',
+    'Segunda-feira',
+    'Terça-feira',
+    'Quarta-feira',
+    'Quinta-feira',
+    'Sexta-feira',
+    'Sábado',
+  ],
+  dayNamesShort: ['Dom.', 'Seg.', 'Ter.', 'Qua.', 'Qui.', 'Sex.', 'Sáb.'],
+  today: 'Hoje',
+};
 LocaleConfig.defaultLocale = 'pt-br';
 
 export default class Schedule extends Component {
@@ -21,13 +55,13 @@ export default class Schedule extends Component {
     super(props);
 
     this.state = {
-      items: {}
+      items: {},
     };
-   }
+  }
 
   render() {
     return (
-      <Agenda        
+      <Agenda
         testID={testIDs.agenda.CONTAINER}
         items={this.state.items}
         loadItemsForMonth={this.loadItems.bind(this)}
@@ -64,15 +98,17 @@ export default class Schedule extends Component {
           for (let j = 0; j < numItems; j++) {
             this.state.items[strTime].push({
               name: 'Item for ' + strTime + ' #' + j,
-              height: Math.max(50, Math.floor(Math.random() * 150))
+              height: Math.max(50, Math.floor(Math.random() * 150)),
             });
           }
         }
       }
       const newItems = {};
-      Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
+      Object.keys(this.state.items).forEach((key) => {
+        newItems[key] = this.state.items[key];
+      });
       this.setState({
-        items: newItems
+        items: newItems,
       });
     }, 1000);
   }
@@ -81,9 +117,8 @@ export default class Schedule extends Component {
     return (
       <TouchableOpacity
         testID={testIDs.agenda.ITEM}
-        style={[styles.item, {height: item.height}]} 
-        onPress={() => Alert.alert(item.name)}
-      >
+        style={[styles.item, {height: item.height}]}
+        onPress={() => Alert.alert(item.name)}>
         <Text>{item.name}</Text>
       </TouchableOpacity>
     );
@@ -114,11 +149,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginRight: 10,
-    marginTop: 17
+    marginTop: 17,
   },
   emptyDate: {
     height: 15,
-    flex:1,
-    paddingTop: 30
-  }
+    flex: 1,
+    paddingTop: 30,
+  },
 });

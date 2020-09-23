@@ -4,6 +4,8 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
+#import <React/RCTLinkingManager.h> // <<< RTFD....IT'S NOT OUR PACKAGE THAT HAS PROBLEM, BUT YOU DIDN'T READ THE DOC AND DIDN'T FOLLOW MY HINT IN THE ISSUE YOU OPENED
+
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
@@ -53,6 +55,16 @@ static void InitializeFlipper(UIApplication *application) {
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
+}
+
+ // <<< RTFD....IT'S NOT OUR PACKAGE THAT HAS PROBLEM, BUT YOU DIDN'T READ THE DOC AND DIDN'T FOLLOW MY HINT IN THE ISSUE YOU OPENED
+ // HOW THE APPLICATION CAN REDIRECT TO A PAGE ID YOU DIDN'T SET THE DEEP LINKS?????? I TOLD YOU THIS AND IT IS WRITTEN IN THE DOC!!!
+// Deep linking
+- (BOOL)application:(UIApplication *)application
+   openURL:(NSURL *)url
+   options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  return [RCTLinkingManager application:application openURL:url options:options];
 }
 
 @end
