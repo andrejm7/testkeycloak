@@ -1,4 +1,4 @@
-import { RNKeycloak } from '@react-keycloak/native';
+import {RNKeycloak} from '@react-keycloak/native';
 
 // Setup Keycloak instance as needed
 // Pass initialization options as required
